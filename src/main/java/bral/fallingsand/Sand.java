@@ -38,6 +38,37 @@ public class Sand
     public void fall()
     {
         //moves all sand down one square
+        // create 2D array for next frame of animation
+        int[][] nextField = new int[3][3];
+
+        // check every cell
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 3; x++)
+            {
+                // what is the state?
+                int currState = field[y][x];
+                // if it's sand:
+                if (currState > 0)
+                {
+                    // what's below?
+                    int below = field[y][x + 1];
+
+                    // if it's empty below and not at bottom edge,
+                    // let it fall
+                    if (below == 0 && y < 2)
+                    {
+                        nextField[y + 1][x] = currState;
+                    }
+                    else // stay put
+                    {
+                        nextField[y][x] = currState;
+                    }
+                }
+            }
+        }
+        // update the field with the new state
+        field = nextField;
     }
 
 

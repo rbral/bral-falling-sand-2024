@@ -39,10 +39,10 @@ public class SandTest
         Sand sand = new Sand();
         sand.put(1, 0);
 
-        //when
+        // when
         sand.fall();
 
-        //then
+        // then
         assertEquals("000\n010\n000\n", sand.toString());
     }
 
