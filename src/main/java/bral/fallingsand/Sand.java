@@ -56,8 +56,7 @@ public class Sand
 
                     // if it's empty below and not at bottom edge,
                     // let it fall
-                    if (below == 0 && y < 2)
-                    {
+                    if (below == 0 && y < 2) {
                         nextField[y + 1][x] = currState;
                     }
                     else // stay put
