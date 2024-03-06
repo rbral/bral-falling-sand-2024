@@ -75,4 +75,24 @@ public class SandTest
         assertEquals("000\n010\n010\n", sand.toString());
     }
 
+    @Test
+    public void fallSimultaneously()
+    {
+        /*
+        Makes sure that if you have 010 010 000
+        after middle row falls it will still go back up and
+        check that the top row falls
+         */
+        // given
+        Sand sand = new Sand();
+        sand.put(1, 0);
+        sand.put(1, 1);
+
+        // when
+        sand.fall();
+
+        // then
+        assertEquals("000\n010\n010\n", sand.toString());
+    }
+
 }
