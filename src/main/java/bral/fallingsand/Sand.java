@@ -1,7 +1,12 @@
 package bral.fallingsand;
 
 public class Sand {
-    private int[][] field = new int[3][3];
+
+    private int[][] field; // [height] [width]
+
+    public Sand(int width, int height) {
+        field = new int[height][width];
+    }
 
     public String toString() {
         // StringBuilder is more memory efficient than doing += with strings

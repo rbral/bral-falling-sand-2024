@@ -4,13 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SandTest
-{
+public class SandTest {
     @Test
-    public void string()
-    {
+    public void string() {
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
 
         // when
         String actual = sand.toString();
@@ -20,10 +18,9 @@ public class SandTest
     }
 
     @Test
-    public void put()
-    {
+    public void put() {
         //given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
 
         //when
         sand.put(1, 0);
@@ -33,10 +30,9 @@ public class SandTest
     }
 
     @Test
-    public void fall()
-    {
+    public void fall() {
         //given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 0);
 
         // when
@@ -47,10 +43,9 @@ public class SandTest
     }
 
     @Test
-    public void fallOnGround()
-    {
+    public void fallOnGround() {
         //given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 2);
 
         //when
@@ -61,10 +56,9 @@ public class SandTest
     }
 
     @Test
-    public void fallOnOtherSand()
-    {
+    public void fallOnOtherSand() {
         //given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 1);
         sand.put(1, 2);
 
@@ -76,15 +70,14 @@ public class SandTest
     }
 
     @Test
-    public void fallSimultaneously()
-    {
+    public void fallSimultaneously() {
         /*
         Makes sure that if you have 010 010 000
         after middle row falls it will still go back up and
         check that the top row falls
          */
         // given
-        Sand sand = new Sand();
+        Sand sand = new Sand(3, 3);
         sand.put(1, 0);
         sand.put(1, 1);
 
