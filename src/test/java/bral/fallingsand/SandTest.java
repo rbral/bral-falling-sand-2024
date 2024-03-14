@@ -144,7 +144,7 @@ public class SandTest {
     @Test
     public void randomSand() {
         //given
-        Sand sand = new Sand(50, 50);
+        Sand sand = new Sand(50, 10);
 
         //when
         sand.randomSand(10);
@@ -152,22 +152,6 @@ public class SandTest {
         //then
         System.out.println(sand.toString());
     }
-
-
-    // my old notes:
-/*    @Test
-    public void fallOnOtherSand() {
-        //given
-        Sand sand = new Sand(3, 3);
-        sand.put(1, 1);
-        sand.put(1, 2);
-
-        //when
-        sand.fall();
-
-        //then
-        assertEquals("000\n010\n010\n", sand.toString());
-    }*/
 
 
 }
