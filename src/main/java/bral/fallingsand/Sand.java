@@ -102,7 +102,8 @@ public class Sand {
     }
 
     // old code
-                /*if (field[y + 1][x] == 0) {
+
+    /*if (field[y + 1][x] == 0) {
                     // does the sand fall straight down?
                     if (field[y][x] == 1 && field[y + 1][x] == 0) {
                         field[y][x] = 0;
