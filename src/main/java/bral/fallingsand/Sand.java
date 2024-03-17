@@ -93,13 +93,60 @@ public class Sand {
                     int direction1 = rightFirst ? +1 : -1;
                     int direction2 = rightFirst ? -1 : +1;
 
-                    if (field[y + 1][x + direction1] == 0) {
+                    if (x + direction1 >= 0 && x + direction1 < field[y].length && field[y + 1][x + direction1] == 0) {
                         field[y][x] = 0;
                         field[y + 1][x + direction1] = 1;
-                    } else if (field[y + 1][x + direction2] == 0) {
+                    } else if (x + direction2 >= 0 && x + direction2 < field[y].length && field[y + 1][x + direction2] == 0) {
+                        // Check if moving left would exceed bounds
                         field[y][x] = 0;
                         field[y + 1][x + direction2] = 1;
                     }
+
+
+
+                    /*
+                    past attempts: just here to show the effort I invested,
+                    but I will delete these after.
+
+                    if (field[y + 1][x + direction1] == 0) {
+
+                        // check if moving right would exceed bounds
+                        if (x + direction1 >= 0 && x + direction1 < field[y].length) {
+                            field[y][x] = 0;
+                            field[y + 1][x + direction1] = 1;
+                        }
+
+                        *//*if ((x + direction1) < field[y].length) {
+                            field[y][x] = 0;
+                            field[y + 1][x + direction1] = 1;
+                        }*//*
+
+                     *//*if (x != field.length - 1) // if NOT at right-most index
+                        {
+                            field[y][x] = 0;
+                            field[y + 1][x + direction1] = 1;
+                        }*//*
+
+                    } else if (field[y + 1][x + direction2] == 0) {
+                        // check if moving left would exceed bounds:
+                        if (x + direction2 >= 0 && x + direction2 < field[y].length) {
+                            field[y][x] = 0;
+                            field[y + 1][x + direction2] = 1;
+                        }
+
+                        *//*if ((x + direction2) > 0) {
+                            field[y][x] = 0;
+                            field[y + 1][x + direction2] = 1;
+                        }*//*
+
+
+                        // check if left bound
+                        *//*if (x != 0)  // if NOT at left-most index
+                        {
+                            field[y][x] = 0;
+                            field[y + 1][x + direction2] = 1;
+                        }*//*
+                    }*/
                 }
 
             }
