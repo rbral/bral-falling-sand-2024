@@ -25,6 +25,7 @@ public class Sand {
         this.height = height;
     }
 
+
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
 
@@ -48,6 +49,18 @@ public class Sand {
 
     }
 
+    // getters:
+    public int[][] getField() {
+        return field;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
 
     public String toString() {
         // StringBuilder is more memory efficient than doing += with strings

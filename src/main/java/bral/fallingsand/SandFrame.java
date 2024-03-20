@@ -18,6 +18,7 @@ public class SandFrame extends JFrame {
 
         SandComponent sandComponent = new SandComponent(sand);
         add(sandComponent, BorderLayout.CENTER);
+//        setLayout(new GridLayout(800, 600));
     }
 
 }
