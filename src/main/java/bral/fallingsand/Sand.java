@@ -216,7 +216,6 @@ public class Sand {
             String currString = substrings[i];
             for (int j = 0; j < currString.length(); j++) {
                 char currChar = currString.charAt(j);
-//                int currInt = (int) currChar;
                 if (currChar == '1') {
                     put(positionX, positionY);
                 }
