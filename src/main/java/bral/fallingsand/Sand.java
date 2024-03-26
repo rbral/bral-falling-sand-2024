@@ -88,17 +88,41 @@ public class Sand {
         field[y][x] = 1;
     }
 
+    /**
+     * moves the sand from x1, y1, to x2, y2
+     *
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @return true if the move was successful, otherwise false
+     */
+    public boolean move(int x1, int y1, int x2, int y2) {
+        if (isSand(x1, y1) && !isSand(x2, y2)) {
+            field[y1][x1] = 0;
+            field[y2][x2] = 1;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean inBounds(int x, int y) {
+        return true;
+    }
+
     public void fall() {
         //moves all sand down one square
 
         for (int y = field.length - 2; y >= 0; y--) {
             for (int x = 0; x < field[y].length; x++) {
 
-                if (field[y][x] == 1) {
-                    if (field[y + 1][x] == 0) {
+                if (isSand(x, y)) {
+                    if (!isSand(x, y + 1)) {
                         // does the sand fall straight down?
-                        field[y][x] = 0;
-                        field[y + 1][x] = 1;
+                        move(x, y, x, y + 1);
+                        /*field[y][x] = 0;
+                        field[y + 1][x] = 1;*/
                         continue;
                     }
 
@@ -107,59 +131,17 @@ public class Sand {
                     int direction2 = rightFirst ? -1 : +1;
 
                     if (x + direction1 >= 0 && x + direction1 < field[y].length && field[y + 1][x + direction1] == 0) {
-                        field[y][x] = 0;
-                        field[y + 1][x + direction1] = 1;
+                        move(x, y, x + direction1, y + 1);
+                        /*field[y][x] = 0;
+                        field[y + 1][x + direction1] = 1;*/
                     } else if (x + direction2 >= 0 && x + direction2 < field[y].length && field[y + 1][x + direction2] == 0) {
                         // Check if moving left would exceed bounds
-                        field[y][x] = 0;
-                        field[y + 1][x + direction2] = 1;
+                        move(x, y, x + direction2, y + 1);
+                        /*field[y][x] = 0;
+                        field[y + 1][x + direction2] = 1;*/
                     }
 
 
-
-                    /*
-                    past attempts: just here to show the effort I invested,
-                    but I will delete these after.
-
-                    if (field[y + 1][x + direction1] == 0) {
-
-                        // check if moving right would exceed bounds
-                        if (x + direction1 >= 0 && x + direction1 < field[y].length) {
-                            field[y][x] = 0;
-                            field[y + 1][x + direction1] = 1;
-                        }
-
-                        *//*if ((x + direction1) < field[y].length) {
-                            field[y][x] = 0;
-                            field[y + 1][x + direction1] = 1;
-                        }*//*
-
-                     *//*if (x != field.length - 1) // if NOT at right-most index
-                        {
-                            field[y][x] = 0;
-                            field[y + 1][x + direction1] = 1;
-                        }*//*
-
-                    } else if (field[y + 1][x + direction2] == 0) {
-                        // check if moving left would exceed bounds:
-                        if (x + direction2 >= 0 && x + direction2 < field[y].length) {
-                            field[y][x] = 0;
-                            field[y + 1][x + direction2] = 1;
-                        }
-
-                        *//*if ((x + direction2) > 0) {
-                            field[y][x] = 0;
-                            field[y + 1][x + direction2] = 1;
-                        }*//*
-
-
-                        // check if left bound
-                        *//*if (x != 0)  // if NOT at left-most index
-                        {
-                            field[y][x] = 0;
-                            field[y + 1][x + direction2] = 1;
-                        }*//*
-                    }*/
                 }
 
             }
@@ -168,6 +150,9 @@ public class Sand {
 
     }
 
+    public boolean isSand(int x, int y) {
+        return field[y][x] == 1;
+    }
 
     public void randomSand(int n) {
         //This will add n pieces of sand into the field in random positions
@@ -178,36 +163,98 @@ public class Sand {
             put(randomPositionX, randomPositionY);
 
         }
+    }
 
-        /*
-        OLD ATTEMPT: (more complicated than instructions asked apparently...)
-        needs to check where there are empty boxes on top
-        of the empty boxes, choose where to put sand
-        fall
-        repeat
-         */
-        /*for (int i = 0; i < n; i++) {
-            ArrayList<Integer> emptySpotsArray = new ArrayList<>();
-            // make list of all the empty spots
-            for (int x = 0; x < field[0].length; x++) {
-                if (field[0][x] == 0) {
-                    emptySpotsArray.add(x); // add index to emptySpotsArray
+    public void resize(int width, int height) {
+        int[][] newField = new int[height][width];
+        // iterate over the new field size
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // check if this position is in bounds of old field
+                if (y < height && x < width) {
+                    // copy value over
+                    newField[y][x] = field[y][x];
+                } else {
+                    // out of bounds: set it to 0
+                    newField[y][x] = 0;
                 }
             }
-            if (emptySpotsArray.size() != 0) {
-                int randomIndexOfEmptySpotsArray = random.nextInt(0, emptySpotsArray.size());
-                int randomEmptySpot = emptySpotsArray.get(randomIndexOfEmptySpotsArray);
-                // place sand at that index:
-                put(randomEmptySpot, 0);
-                // remove from array:
-                emptySpotsArray.remove(randomEmptySpot);
-                fall();
-            } else // screen is full, no more spots
-            {
-                return;
-            }
-        }*/
+        }
+        // update values: ?
+        /*width = this.width;
+        height = this.height;*/
 
+        // old code...
+        /*// if old field is smaller than new field: (easiest scenario)
+        if (width < this.width && height < this.height) {
+            for (int y = 0; y < field.length; y++) {
+                for (int x = 0; x < field[y].length; x++) {
+                    if (isSand(y, x)) {
+                        newField[y][x] = 1;
+                    }
+                }
+            }
+        } else if (width > this.width && height < this.height) {
+
+        } else if (width < this.width && height > this.height) {
+
+        } else if (width > this.width && height > this.height) {
+
+        }*/
+//        field = newField;
+
+    }
+
+    /**
+     * @param sandString is a string of the field with \n in between each row
+     *                   example: "000\n010\n010"
+     */
+    public void load(String sandString) {
+        String[] substrings = sandString.split("\n"); // substrings = {"000", "010", "000"}
+
+        int positionY = 0;
+        for (int i = 0; i < substrings.length; i++) {
+
+            int positionX = 0;
+
+            // for each of the "###" sets:
+            String currString = substrings[i];
+
+            for (int j = 0; j < currString.length(); j++) {
+                char currChar = currString.charAt(j);
+                int currInt = (int) currChar;
+                if (currInt == 1) {
+                    put(positionX, positionY);
+                }
+                positionX++;
+            }
+
+            positionY++;
+        }
+
+    }
+
+    /**
+     * starting at x, y to x+width and y+height, set each item in field to be a sand
+     * if random.nextDouble() <= probability
+     *
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param probability
+     */
+    public void put(int x, int y, int width, int height, double probability) {
+
+        for (int i = y; i < y + height; i++) {
+            for (int j = x; j < x + width; j++) {
+
+                if (random.nextDouble() <= probability) {
+                    put(j, i);
+                }
+
+            }
+        }
 
     }
 
