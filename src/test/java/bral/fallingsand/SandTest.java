@@ -171,5 +171,33 @@ public class SandTest {
         assertEquals("000\n001\n011\n", sand.toString());
     }
 
+    @Test
+    public void resize() {
+        //given
+        Sand sand = new Sand(3, 3);
+        sand.put(0, 2);
+        sand.put(1, 2);
+        sand.put(2, 2);
+
+        // when
+        sand.resize(2, 3);
+
+        // then
+        assertEquals("00\n00\n11\n", sand.toString());
+
+
+    }
+
+    @Test
+    public void load() {
+        // given
+        Sand sand = new Sand(3, 3);
+
+        // when
+        sand.load("000\n000\n010");
+
+        assertEquals("000\n000\n010\n", sand.toString());
+    }
+
 
 }
