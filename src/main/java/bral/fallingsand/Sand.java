@@ -200,27 +200,6 @@ public class Sand {
         this.height = height;
         System.arraycopy(newField, 0, field, 0, height);
 
-        /*width = this.width;
-        height = this.height;*/
-
-        // old code...
-        /*// if old field is smaller than new field: (easiest scenario)
-        if (width < this.width && height < this.height) {
-            for (int y = 0; y < field.length; y++) {
-                for (int x = 0; x < field[y].length; x++) {
-                    if (isSand(y, x)) {
-                        newField[y][x] = 1;
-                    }
-                }
-            }
-        } else if (width > this.width && height < this.height) {
-
-        } else if (width < this.width && height > this.height) {
-
-        } else if (width > this.width && height > this.height) {
-
-        }*/
-//        field = newField;
 
     }
 
@@ -230,15 +209,11 @@ public class Sand {
      */
     public void load(String sandString) {
         String[] substrings = sandString.split("\n"); // substrings = {"000", "010", "000"}
-
         int positionY = 0;
         for (int i = 0; i < substrings.length; i++) {
-
             int positionX = 0;
-
             // for each of the "###" sets:
             String currString = substrings[i];
-
             for (int j = 0; j < currString.length(); j++) {
                 char currChar = currString.charAt(j);
 //                int currInt = (int) currChar;
