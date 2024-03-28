@@ -3,10 +3,12 @@ package bral.fallingsand;
 import java.util.Random;
 import java.util.Scanner;
 
+import static java.lang.Math.min;
+
 public class Sand {
 
     private final Random random;
-    private final int[][] field; // [height] [width]
+    private int[][] field; // [height] [width]
     private int height;
     private int width;
 
@@ -183,22 +185,16 @@ public class Sand {
     public void resize(int width, int height) {
         int[][] newField = new int[height][width];
         // iterate over the new field size
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                // check if this position is in bounds of old field
-                if (y < this.height && x < this.width) {
-                    // copy value over
-                    newField[y][x] = field[y][x];
-                } else {
-                    // out of bounds: set it to 0
-                    newField[y][x] = 0;
-                }
+        for (int y = 0; y < min(field.length, newField.length); y++) {
+            for (int x = 0; x < min(field[y].length, newField[y].length); x++) {
+                newField[y][x] = field[y][x];
             }
         }
         // update values:
         this.width = width;
         this.height = height;
-        System.arraycopy(newField, 0, field, 0, height);
+        field = newField;
+//        System.arraycopy(newField, 0, field, 0, height);
 
 
     }
@@ -218,6 +214,8 @@ public class Sand {
                 char currChar = currString.charAt(j);
                 if (currChar == '1') {
                     put(positionX, positionY);
+                } else {
+                    field[positionY][positionX] = 0;
                 }
                 positionX++;
             }
