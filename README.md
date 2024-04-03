@@ -4,7 +4,7 @@ A falling-sand game is a genre of video game and a sub-genre of sandbox games wh
 particle or cellular automaton based game engine to simulate various materials interacting in a sandbox environment.
 [wiki](https://en.wikipedia.org/wiki/Falling-sand_game)
 
-![sand])(screenshots/sand.png)
+![sand](screenshots/sand.png)
 
 ###Links
 
