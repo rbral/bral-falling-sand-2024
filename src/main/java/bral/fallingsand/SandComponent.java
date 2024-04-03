@@ -21,6 +21,9 @@ public class SandComponent extends JComponent {
         this.height = sand.getHeight();
         this.width = sand.getWidth();
 
+        Timer timer = new Timer(10, e -> repaint());
+        timer.start();
+
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -84,30 +87,7 @@ public class SandComponent extends JComponent {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-        // define size of each cell
-        /*int cellWidth = getWidth() / sand.getWidth();
-        int cellHeight = getHeight() / sand.getHeight();
-
-        for (int y = 0; y < sand.getHeight(); y += 0.1) {
-            for (int x = 0; x < sand.getWidth(); x += 0.1) {
-                if (currField[y][x] == 1) {
-                    int drawX = x * cellWidth;
-                    int drawY = -y * cellHeight;
-                    g.setColor(Color.YELLOW);
-                    g.fillRect(drawX, drawY, cellWidth, cellHeight);
-                }
-            }
-        }
-
-        // new attempt:
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                if (currField[y][x] == 1) {
-
-                }
-            }
-        }*/
+        
 
     }
 }
